@@ -12,6 +12,64 @@ This release contains the MSCAD model, training and scoring code, a CSV runner, 
 
 *MSCAD architecture from the paper. Patch scales 4, 16, and 64 capture different temporal resolutions, exchange information through symmetric attention, and contribute equally to the window anomaly score.*
 
+## Main results
+
+Results from [Table 1 of the paper](https://arxiv.org/html/2609.38004v1#S4.T1). MSCAD scores are means over three seeds; external baseline scores are taken from prior published reports unless otherwise noted in the paper. These are the paper's reported results, not new runs of this public release.
+
+Higher is better for all metrics. **Bold** marks the best score and <ins>underline</ins> the second-best within each split, following the paper. VUS-PR is the primary metric. VUS-PR, VUS-ROC, and Range-F1 are range-wise measures; AUC-PR, AUC-ROC, and Point-F1 are point-wise measures.
+
+Families: **Stat.** = statistical/ML; **NN/Trans.** = neural-network/Transformer; **FM** = foundation/pretrained models. Multi-scale indicates explicit modeling of multiple temporal resolutions.
+
+### TSB-AD-U: univariate
+
+23 datasets, 350 series.
+
+| Family | Method | Multi-scale | VUS-PR | VUS-ROC | Range-F1 | AUC-PR | AUC-ROC | Point-F1 |
+|---|---|:---:|---:|---:|---:|---:|---:|---:|
+| Stat. | Sub-PCA | ✗ | 0.42 | 0.76 | 0.41 | 0.37 | 0.71 | 0.42 |
+| Stat. | KShapeAD | ✗ | 0.40 | 0.76 | 0.40 | 0.35 | 0.74 | 0.39 |
+| NN/Trans. | USAD | ✗ | 0.36 | 0.71 | 0.40 | 0.32 | 0.66 | 0.37 |
+| NN/Trans. | AnomalyTransformer | ✗ | 0.12 | 0.56 | 0.14 | 0.08 | 0.50 | 0.12 |
+| NN/Trans. | TimesNet | ✓ | 0.26 | 0.72 | 0.21 | 0.18 | 0.61 | 0.24 |
+| NN/Trans. | PatchTST | ✗ | 0.26 | 0.75 | 0.22 | 0.21 | 0.63 | 0.25 |
+| NN/Trans. | DCdetector | ✗ | 0.09 | 0.56 | 0.10 | 0.05 | 0.50 | 0.10 |
+| NN/Trans. | iTransformer | ✗ | 0.22 | 0.74 | 0.18 | 0.16 | 0.61 | 0.21 |
+| NN/Trans. | FITS | ✗ | 0.26 | 0.73 | 0.20 | 0.17 | 0.61 | 0.23 |
+| NN/Trans. | DADA | ✗ | 0.31 | 0.77 | 0.31 | 0.29 | 0.71 | 0.38 |
+| NN/Trans. | CrossAD | ✓ | 0.43 | 0.82 | 0.40 | 0.41 | 0.77 | 0.45 |
+| NN/Trans. | KAN-AD | ✗ | 0.43 | 0.82 | 0.43 | 0.41 | 0.80 | 0.44 |
+| NN/Trans. | PaAno | ✗ | <ins>0.52</ins> | <ins>0.89</ins> | <ins>0.48</ins> | <ins>0.46</ins> | <ins>0.86</ins> | <ins>0.51</ins> |
+| FM | OFA | ✗ | 0.24 | 0.71 | 0.20 | 0.16 | 0.59 | 0.22 |
+| FM | Lag-Llama | ✗ | 0.27 | 0.72 | 0.31 | 0.25 | 0.65 | 0.30 |
+| FM | MOMENT (FT) | ✗ | 0.39 | 0.76 | 0.35 | 0.30 | 0.69 | 0.35 |
+| FM | MOMENT (ZS) | ✗ | 0.38 | 0.75 | 0.36 | 0.30 | 0.68 | 0.35 |
+| FM | TimesFM | ✗ | 0.30 | 0.74 | 0.34 | 0.28 | 0.67 | 0.34 |
+| — | **MSCAD** | ✓ | **0.57** | **0.90** | **0.55** | **0.52** | **0.89** | **0.56** |
+
+### TSB-AD-M: multivariate
+
+17 datasets, 180 series.
+
+| Family | Method | Multi-scale | VUS-PR | VUS-ROC | Range-F1 | AUC-PR | AUC-ROC | Point-F1 |
+|---|---|:---:|---:|---:|---:|---:|---:|---:|
+| Stat. | Sub-PCA | ✗ | 0.31 | 0.74 | 0.29 | 0.31 | 0.70 | 0.37 |
+| Stat. | KMeansAD | ✗ | 0.29 | 0.73 | 0.33 | 0.25 | 0.69 | 0.31 |
+| NN/Trans. | DeepAnT | ✗ | 0.31 | <ins>0.76</ins> | 0.37 | 0.32 | 0.73 | 0.37 |
+| NN/Trans. | OmniAnomaly | ✗ | 0.31 | 0.69 | 0.37 | 0.27 | 0.65 | 0.32 |
+| NN/Trans. | AnomalyTransformer | ✗ | 0.12 | 0.57 | 0.14 | 0.07 | 0.52 | 0.12 |
+| NN/Trans. | TimesNet | ✓ | 0.19 | 0.64 | 0.17 | 0.13 | 0.56 | 0.20 |
+| NN/Trans. | PatchTST | ✗ | 0.28 | 0.71 | 0.26 | 0.26 | 0.65 | 0.32 |
+| NN/Trans. | DCdetector | ✗ | 0.10 | 0.56 | 0.10 | 0.06 | 0.50 | 0.10 |
+| NN/Trans. | iTransformer | ✗ | 0.29 | 0.70 | 0.23 | 0.23 | 0.63 | 0.28 |
+| NN/Trans. | FITS | ✗ | 0.21 | 0.66 | 0.16 | 0.15 | 0.58 | 0.22 |
+| NN/Trans. | DADA | ✗ | 0.31 | 0.73 | 0.25 | 0.31 | 0.69 | 0.35 |
+| NN/Trans. | CATCH | ✗ | 0.30 | 0.73 | 0.27 | 0.24 | 0.67 | 0.30 |
+| NN/Trans. | CrossAD | ✓ | 0.32 | 0.73 | 0.29 | 0.32 | 0.70 | 0.37 |
+| NN/Trans. | KAN-AD | ✗ | 0.41 | 0.75 | <ins>0.41</ins> | <ins>0.38</ins> | 0.73 | 0.42 |
+| NN/Trans. | PaAno | ✗ | <ins>0.43</ins> | **0.79** | <ins>0.41</ins> | <ins>0.38</ins> | <ins>0.76</ins> | <ins>0.43</ins> |
+| FM | OFA | ✗ | 0.21 | 0.63 | 0.17 | 0.15 | 0.55 | 0.21 |
+| — | **MSCAD** | ✓ | **0.47** | **0.79** | **0.46** | **0.45** | **0.78** | **0.49** |
+
 ## Installation
 
 Use Python 3.9 or newer (Python 3.11 recommended) with NumPy and PyTorch:
