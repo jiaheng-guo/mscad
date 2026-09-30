@@ -4,6 +4,8 @@ Multi-scale autoencoders with bidirectional attention for time-series anomaly de
 
 Companion implementation for **No Scale Left Behind: Multi-Scale Autoencoders with Bidirectional Attention for Time Series Anomaly Detection**, by Jiaheng Guo, Haochen Zhang, Morris Yu-Chao Huang, Jinhao Duan, Nicholas Konz, and Tianlong Chen.
 
+[arXiv:2609.38004](https://arxiv.org/abs/2609.38004) · [Paper PDF](https://arxiv.org/pdf/2609.38004)
+
 This release contains the MSCAD model, training and scoring code, a CSV runner, and tests. Datasets, saved results, weights, and exploratory models are not included.
 
 ![MSCAD architecture: three patch-scale Transformer branches, two symmetric cross-scale attention blocks, and uniform reconstruction-error fusion.](assets/figures/architecture.png)
