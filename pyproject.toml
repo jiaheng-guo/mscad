@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mscad"
+version = "0.1.0"
+description = "Multi-scale autoencoders with bidirectional attention for time-series anomaly detection"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24,<3", "torch>=2.0,<3"]
+
+[project.optional-dependencies]
+evaluation = ["TSB-AD==1.5", "statsmodels>=0.14,<0.15"]
+test = ["pytest>=7,<9"]
+
+[project.scripts]
+mscad = "mscad.cli:main"
+
+[project.urls]
+Repository = "https://github.com/jiaheng-guo/mscad"
+
+[tool.setuptools.packages.find]
+include = ["mscad*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

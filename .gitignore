@@ -1,0 +1,31 @@
+# Local datasets, runs, scores, checkpoints, and research artifacts.
+data/
+Datasets/
+outputs/
+results/
+logs/
+*.csv
+*.tsv
+*.npy
+*.npz
+*_seed*_test.json
+*_seed*_full.json
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pdf
+*.zip
+
+# Python and local environments.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.DS_Store
+.env
+.env.*
