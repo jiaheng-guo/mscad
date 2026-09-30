@@ -6,6 +6,10 @@ Companion implementation for **No Scale Left Behind: Multi-Scale Autoencoders wi
 
 This release contains the MSCAD model, training and scoring code, a CSV runner, and tests. Datasets, saved results, weights, and exploratory models are not included.
 
+![MSCAD architecture: three patch-scale Transformer branches, two symmetric cross-scale attention blocks, and uniform reconstruction-error fusion.](assets/figures/architecture.png)
+
+*MSCAD architecture from the paper. Patch scales 4, 16, and 64 capture different temporal resolutions, exchange information through symmetric attention, and contribute equally to the window anomaly score.*
+
 ## Installation
 
 Use Python 3.9 or newer (Python 3.11 recommended) with NumPy and PyTorch:
@@ -77,6 +81,10 @@ Evaluation uses `TSB-AD==1.5` and passes raw scores to its official metric routi
 ## Model and defaults
 
 Each channel is processed by the same network. Three branches extract overlapping patches, encode them with Transformers, exchange information through symmetric cross-attention, and reconstruct the patches. Within each bridge block, every scale attends to the other scales' tokens from the **same pre-update snapshot**. This avoids privileging whichever scale happens to be processed first.
+
+![Cross-scale interaction patterns: independent scales, coarse-to-fine flow, and MSCAD's bidirectional exchange between every pair of scales.](assets/figures/cross-scale.png)
+
+*Cross-scale interaction patterns from the paper. MSCAD allows every pair of scales to exchange information in both directions.*
 
 Per-scale reconstruction errors are averaged uniformly. Window scores are averaged over the timestamps they cover, then scores are averaged across channels.
 
