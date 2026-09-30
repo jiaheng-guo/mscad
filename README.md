@@ -134,6 +134,22 @@ python -m mscad --help
 
 The evaluation protocol and metrics build on Qinghua Liu and John Paparrizos, *The Elephant in the Room: Towards A Reliable Time-Series Anomaly Detection Benchmark*, NeurIPS 2024. Please cite that work when using TSB-AD.
 
+## Citation
+
+If you use MSCAD in your research, please cite the [paper](https://arxiv.org/abs/2609.38004):
+
+```bibtex
+@misc{guo2026mscad,
+  title         = {No Scale Left Behind: Multi-Scale Autoencoder with Bi-directional Attention for Time Series Anomaly Detection},
+  author        = {Jiaheng Guo and Haochen Zhang and Yu-Chao Huang and Jinhao Duan and Nicholas Konz and Tianlong Chen},
+  year          = {2026},
+  eprint        = {2609.38004},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2609.38004}
+}
+```
+
 ## License
 
 MSCAD code is released under the [MIT License](LICENSE). External datasets and dependencies retain their own licenses.
